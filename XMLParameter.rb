@@ -66,15 +66,3 @@ class XMLParameter
     return first
   end
 end
-
-value = XMLParameter.new
-value.add("Serial",1234567)
-puts value.pop
-value.add("Domain","Polwath.com")
-puts value.pop
-value.add("Name","Polwath")
-puts value.pop
-value.add("Surname","Rojchalermritra")
-puts value.pop
-value.add("username","polwath2534")
-puts value.pop
