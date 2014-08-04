@@ -1,4 +1,5 @@
 require_relative 'XMLReqRes.rb'
+require_relative 'ServiceCode.rb'
 require_relative 'XMLTag.rb'
 
 class XMLRequest < XMLReqRes
@@ -10,8 +11,9 @@ class XMLRequest < XMLReqRes
   end
   
   def XMLRequest
-    this = XMLReqRes.new
-    this.setSid("")
+    @this = XMLReqRes.new
+    @this.setSid("")
+    @code = ServiceCode.new
     @domainName = ""
     @serialNumber = ""
     @paramTag = Array.new
@@ -56,5 +58,20 @@ class XMLRequest < XMLReqRes
     paramTag.push(tag.XMLTag(tagname, Array.new))
     tag = @paramTag[@paramTag.count - 1]
     return tag
+  end
+  
+  def toString
+    @xml = "<?xml version=\"1.0\"?>
+              <secuotp>
+                <service sid=\"#{@this.getSid}\"> #{@code.getServiceName(@this.getSid)} </service>
+                <authentication>
+                  <domain> #{@domainName} </domain>
+                  <serial> #{@serialNumber} </serial>
+                </authentication>
+                <parameter>"
+    
+    param = nil
+    
+    for 
   end
 end
