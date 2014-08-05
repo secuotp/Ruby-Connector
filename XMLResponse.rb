@@ -1,5 +1,4 @@
 require_relative 'XMLResponse.rb'
-require_relative 'XMLParser.rb'
 
 class XMLResponse
   def initialize
@@ -10,8 +9,6 @@ class XMLResponse
   
   def XMLResponse(xml)
     @parameter = XMLParameter.new
-    parse = XMLParser.new
-    parse.XMLParser(xml)
     status = Integer()
   end
 end

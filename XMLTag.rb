@@ -41,20 +41,23 @@ class XMLTag
   end
   
   def haveChildNode
-    return @childNode != nil
+    return @childNode.empty?
   end
   
   def getChildTag(item)
     @childNode[item]
   end
   
-  def addChildTag(tagName, value)
-    @childNode.push(XMLTag(tagName, value))
+  def addChildTag1(tagName, value)
+    tag = XMLTag.new
+    tag.XMLTag(tagName, value)
+    @childNode.push(tag)
   end
   
-  def addChildTag(tagName)
-    @childNode.push(XMLTag(tagName, Array.new));
-    tag = @childNode[@childNode.count - 1];
-    return tag;
+  def addChildTag2(tagName)
+    tag = XMLTag.new
+    tag.XMLTag(tagName, Array.new {Hash.new})
+    @childNode.push(tag)
+    return @childNode[@childNode.count - 1]
   end
 end

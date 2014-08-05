@@ -1,26 +1,32 @@
-require_relative 'XMLReqRes.rb'
 require_relative 'ServiceCode.rb'
 require_relative 'XMLTag.rb'
 
-class XMLRequest < XMLReqRes
+class XMLRequest
   def initialize
     @domainName = nil
+    @id = nil
     @serialNumber = nil
     @paramTag = nil
     @pointer = 0
   end
   
   def XMLRequest
-    @this = XMLReqRes.new
-    @this.setSid("")
     @code = ServiceCode.new
     @domainName = ""
     @serialNumber = ""
-    @paramTag = Array.new
+    @paramTag = Array.new {Hash.new}
   end
   
   def getParamTag
     return @paramTag
+  end
+  
+  def setSid(id)
+    @id = id
+  end
+  
+  def getSid
+    return @id
   end
   
   def setParamTag(paramTag)
@@ -43,35 +49,45 @@ class XMLRequest < XMLReqRes
     @serialNumber = serialNumber
   end
   
-  def getChildTag(item)
-    tag = @paramTag[item]
-    return tag
-  end
-  
-  def addChildTag(tagName, value)
+  def addChildValue(tagName, value)
     tag = XMLTag.new
-    paramTag.push(tag.XMLTag(tagname, value))
+    tag.setTagName(tagname)
+    tag.setChildNode(value)
+    @paramTag.push(tag)
   end
   
   def addChildTag(tagName)
     tag = XMLTag.new
-    paramTag.push(tag.XMLTag(tagname, Array.new))
-    tag = @paramTag[@paramTag.count - 1]
-    return tag
+    tag.setTagName(tagname)
+    tag.setChildNode(Array.new {Hash.new})
+    @paramTag.push(tag)
+    return @paramTag[@paramTag.count - 1]
+  end
+  
+  def setParameter(xmlTag)
+    if xmlTag.haveChildNode
+      p = 0
+      while p < xmlTag.getChildNode.count
+        
+      end
+    end
+    return nil
   end
   
   def toString
-    @xml = "<?xml version=\"1.0\"?>
+    xml = "<?xml version=\"1.0\"?>
               <secuotp>
-                <service sid=\"#{@this.getSid}\"> #{@code.getServiceName(@this.getSid)} </service>
+                <service sid=\"#{@id}\"> #{@code.getServiceName(@id)} </service>
                 <authentication>
                   <domain> #{@domainName} </domain>
                   <serial> #{@serialNumber} </serial>
                 </authentication>
                 <parameter>"
-    
     param = nil
     
-    for 
+       
+    @end = "</parameter>
+          </secuotp>"
+    @xmldoc = @xml + @end
   end
 end
