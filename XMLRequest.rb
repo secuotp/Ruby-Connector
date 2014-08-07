@@ -11,7 +11,6 @@ class XMLRequest
   end
   
   def XMLRequest
-    @code = ServiceCode.new
     @domainName = ""
     @serialNumber = ""
     @paramTag = Array.new {Hash.new}
@@ -51,43 +50,69 @@ class XMLRequest
   
   def addChildValue(tagName, value)
     tag = XMLTag.new
-    tag.setTagName(tagname)
-    tag.setChildNode(value)
+    tag.setTagName(tagName)
+    tag.setValue(value)
     @paramTag.push(tag)
   end
   
   def addChildTag(tagName)
     tag = XMLTag.new
-    tag.setTagName(tagname)
+    tag.setTagName(tagName)
     tag.setChildNode(Array.new {Hash.new})
     @paramTag.push(tag)
-    return @paramTag[@paramTag.count - 1]
+    return @paramTag[@paramTag.size - 1]
   end
   
   def setParameter(xmlTag)
+    puts xmlTag.haveChildNode
     if xmlTag.haveChildNode
+      item = xmlTag.getChildNode
+      subTag1 = "<#{xmlTag.getTagName}>"
+      values = ""
       p = 0
       while p < xmlTag.getChildNode.count
-        
+        begin
+          item2 = item[p]
+          p += 1
+          values = values + setParameter(item2)
+        rescue
+          puts "Error occured - Index out of bound."
+          break
+        end
       end
+      subTag2 = "\n</#{xmlTag.getTagName}>"
+      return subTag1 + values + subTag2
+    else
+      return "\n<#{xmlTag.getTagName}>#{xmlTag.getValue}</#{xmlTag.getTagName}>"
     end
-    return nil
   end
   
   def toString
+    code = ServiceCode.new
     xml = "<?xml version=\"1.0\"?>
               <secuotp>
-                <service sid=\"#{@id}\"> #{@code.getServiceName(@id)} </service>
+                <service sid=\"#{@id}\"> #{code.getServiceName(@id)} </service>
                 <authentication>
                   <domain> #{@domainName} </domain>
                   <serial> #{@serialNumber} </serial>
                 </authentication>
                 <parameter>"
-    param = nil
-    
+    param = ""
+    @pointer = 0
+    while @pointer < @paramTag.size
+      begin
+        tag = @paramTag[@pointer]
+        param = param + "\n" + setParameter(tag)
+        @pointer += 1
+      rescue
+        puts "Error occured - Index out of bound."
+        break
+      end
+    end
        
-    @end = "</parameter>
+    xmlend = "\n</parameter>
           </secuotp>"
-    @xmldoc = @xml + @end
+    @xmldoc = xml + param + xmlend
+    return @xmldoc
   end
 end

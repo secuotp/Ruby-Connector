@@ -49,9 +49,10 @@ class XMLParameter
   
   def getValue(key)
     p = 0
-    while p < @keylist.count do
+    while p < @keylist.size do
       if @keylist[p] == key
         puts @valuelist[p];
+        break
       else
         p += 1
       end
