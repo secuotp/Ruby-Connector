@@ -64,7 +64,6 @@ class XMLRequest
   end
   
   def setParameter(xmlTag)
-    puts xmlTag.haveChildNode
     if xmlTag.haveChildNode
       item = xmlTag.getChildNode
       subTag1 = "<#{xmlTag.getTagName}>"
@@ -76,27 +75,21 @@ class XMLRequest
           p += 1
           values = values + setParameter(item2)
         rescue
-          puts "Error occured - Index out of bound."
+          puts "Error occured - Something went wrong!"
           break
         end
       end
-      subTag2 = "\n</#{xmlTag.getTagName}>"
+      subTag2 = "</#{xmlTag.getTagName}>"
       return subTag1 + values + subTag2
     else
-      return "\n<#{xmlTag.getTagName}>#{xmlTag.getValue}</#{xmlTag.getTagName}>"
+      return "<#{xmlTag.getTagName}>#{xmlTag.getValue}</#{xmlTag.getTagName}>"
     end
   end
   
   def toString
     code = ServiceCode.new
-    xml = "<?xml version=\"1.0\"?>
-              <secuotp>
-                <service sid=\"#{@id}\"> #{code.getServiceName(@id)} </service>
-                <authentication>
-                  <domain> #{@domainName} </domain>
-                  <serial> #{@serialNumber} </serial>
-                </authentication>
-                <parameter>"
+    xml = "<?xml version=\"1.0\"?><secuotp><service sid=\"#{@id}\">#{code.getServiceName(@id)}</service>"+
+          "<authentication><domain>#{@domainName}</domain><serial>#{@serialNumber}</serial></authentication><parameter>"
     param = ""
     @pointer = 0
     while @pointer < @paramTag.size
@@ -105,13 +98,12 @@ class XMLRequest
         param = param + "\n" + setParameter(tag)
         @pointer += 1
       rescue
-        puts "Error occured - Index out of bound."
+        puts "Error occured - Something went wrong!"
         break
       end
     end
        
-    xmlend = "\n</parameter>
-          </secuotp>"
+    xmlend = "</parameter></secuotp>"
     @xmldoc = xml + param + xmlend
     return @xmldoc
   end

@@ -38,7 +38,7 @@ class XMLResponse
     @status = @xml.elements["secuotp/status/"]
     @message = @xml.elements["secuotp/message/"]
     if @xml.elements["secuotp/response"] != nil
-      @xml.elements.each("secuotp/response/") do |sub|
+      @xml.elements.each("secuotp/response/*") do |sub|
         @parameter.add(sub.name,sub.text)
       end
     end

@@ -36,7 +36,7 @@ class XMLParameter
   end
   
   def hasNext
-    return @pointer < keylist.count
+    return @pointer < @keylist.count
   end
   
   def first
