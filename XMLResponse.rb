@@ -37,7 +37,7 @@ class XMLResponse
     @xml = REXML::Document.new(xml)
     @status = @xml.elements["secuotp/status/"]
     @message = @xml.elements["secuotp/message/"]
-    if @xml.elements["secuotp/response"] != nil
+    if @xml.elements["secuotp/response/"] != nil
       @xml.elements.each("secuotp/response/*") do |sub|
         @parameter.add(sub.name,sub.text)
       end
