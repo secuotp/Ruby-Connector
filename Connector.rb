@@ -39,7 +39,7 @@ http = Net::HTTP.new(uri.host, 443)
 http.use_ssl = true
 http.ssl_version = :TLSv1
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-response = http.start {|http| http.request(request)}
+response = http.start {http.request(request)}
 
 res = XMLResponse.new
 res.XMLResponse(response.body)
