@@ -2,31 +2,31 @@ class ServiceCode
   def initialize
     @REGISTER_END_USER = "M-01"
     @REGISTER_END_USER_NAME = "Register End-User"
-    @REGISTER_END_USER_URI = "https://secure.secuotp.co.th/SecuOTP-Service/manage/register/end-user"
+    @REGISTER_END_USER_URI = "https://secuotp.com/SecuOTP-Service/manage/register/end-user"
 
     @DISABLE_END_USER = "M-02"
     @DISABLE_END_USER_NAME = "Disable End-User"
-    @DISABLE_END_USER_URI = "https://secure.secuotp.co.th/SecuOTP-Service/manage/disable/end-user"
+    @DISABLE_END_USER_URI = "https://secuotp.com/SecuOTP-Service/manage/disable/end-user"
 
     @GENERATE_ONE_TIME_PASSWORD = "G-01"
     @GENERATE_ONE_TIME_PASSWORD_NAME = "Generate One-Time Password"
-    @GENERATE_ONE_TIME_PASSWORD_URI = "https://secure.secuotp.co.th/SecuOTP-Service/otp/generate"
+    @GENERATE_ONE_TIME_PASSWORD_URI = "https://secuotp.com/SecuOTP-Service/otp/generate"
 
     @AUTHENTICATE_ONE_TIME_PASSWORD = "A-01"
     @AUTHENTICATE_ONE_TIME_PASSWORD_NAME = "Authenticate One-Time Password"
-    @AUTHENTICATE_ONE_TIME_PASSWORD_URI = "https://secure.secuotp.co.th/SecuOTP-Service/otp/authenticate"
+    @AUTHENTICATE_ONE_TIME_PASSWORD_URI = "https://secuotp.com/SecuOTP-Service/otp/authenticate"
 
     @MIGRATE_ONE_TIME_PASSWORD_CHANNEL = "O-01"
     @MIGRATE_ONE_TIME_PASSWORD_CHANNEL_NAME = "Migrate One-Time Password Channel"
-    @MIGRATE_ONE_TIME_PASSWORD_CHANNEL_URI = "https://secure.secuotp.co.th/SecuOTP-Service/otp/migrate"
+    @MIGRATE_ONE_TIME_PASSWORD_CHANNEL_URI = "https://secuotp.com/SecuOTP-Service/otp/migrate"
 
     @GET_END_USER_DATA = "U-01"
     @GET_END_USER_DATA_NAME = "Get End-User Data"
-    @GET_END_USER_DATA_URI = "https://secure.secuotp.co.th/SecuOTP-Service/user/end-user"
+    @GET_END_USER_DATA_URI = "https://secuotp.com/SecuOTP-Service/user/end-user"
 
     @PUT_END_USER_DATA = "U-02"
     @PUT_END_USER_DATA_NAME = "Set End-User Data"
-    @PUT_END_USER_DATA_URI = "https://secure.secuotp.co.th/SecuOTP-Service/user/end-user"
+    @PUT_END_USER_DATA_URI = "https://secuotp.com/SecuOTP-Service/user/end-user"
   end
 
   def getServiceName(service)
