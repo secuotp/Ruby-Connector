@@ -2,9 +2,10 @@ class ServiceStatus
   def initialize
     @statusId = 0
     @statusText = nil
+    @data = nil
   end
   
-  def ServiceStatus
+  def ServiceStatus(statusId, statusText)
     @statusId = statusId
     @statusText = statusText
   end
@@ -23,5 +24,13 @@ class ServiceStatus
   
   def getStatusText
     return @statusText
+  end
+  
+  def setData(data)
+    @data = data
+  end
+  
+  def getData
+    return @data
   end
 end
